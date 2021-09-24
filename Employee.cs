@@ -29,7 +29,7 @@ namespace HRModel
             get;
             set;
         }
-        public string Mobile_No
+        public long Mobile_No
         {
             get;
             set;

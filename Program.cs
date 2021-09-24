@@ -15,55 +15,37 @@ namespace Proj_HRMS
 
 
 
-            //SqlConnection con = new SqlConnection();
-            //con.ConnectionString = "Data Source=.;Initial Catalog=HRMS; Integrated Security =true";
-            //con.Open();
-            //SqlCommand cmd = new SqlCommand();
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = "Data Source=.;Initial Catalog=HRMS; Integrated Security =true";
+            con.Open();
+            SqlCommand cmd = new SqlCommand();
             //cmd.CommandText = "LoginProc";
 
             //cmd.CommandType = CommandType.StoredProcedure;
-            //cmd.Connection = con;
-            //Console.WriteLine("\nEnter The UserName  :");
-            //string user = Convert.ToString(Console.ReadLine());
-            //Console.WriteLine("\nEnter The Password :");
-            //ConsoleKeyInfo key; string pass = "";
+            cmd.Connection = con;
+            while (true)
+            {
+                Console.WriteLine("*********************HR Management System********************");
 
-            //do
-            //{
-            //    key = Console.ReadKey(true);
-            //    if (key.Key != ConsoleKey.Backspace)
-            //    {
-            //        pass += key.KeyChar;
-            //        Console.Write("*");
-            //    }
-            //} while (key.Key != ConsoleKey.Enter);
+                Console.WriteLine("\nEnter The UserName  :");
+                string user = Convert.ToString(Console.ReadLine());
+                Console.WriteLine("\nEnter The Password :");
+                string pass = Console.ReadLine();
+                if (user == "priya" && pass == "1234")
+                {
+                    Console.WriteLine("\nYou are a valid user");
+                    Console.ReadLine();
+                    break;
+                }
 
-            //cmd.Parameters.AddWithValue("UserName", user);
-            //cmd.Parameters.AddWithValue("Password", pass.TrimEnd());
-
-            //SqlDataReader reader = cmd.ExecuteReader();
-
-
-
-
-
-            //while(reader.Read())
-            //{
-            //    Console.WriteLine("{0},{1}",reader[0],reader[1]);
-            //    if(reader[0]==user && reader[1]==pass)
-            //    {
-            //        Console.WriteLine("Valid User name and Password");
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("Invalid Username And Password");
-            //    }
-            //}
-
-
-
-
-
+                else
+                {
+                    Console.WriteLine("\n\nInvalid user");
+                    Console.WriteLine("Enter the Username and Password Again");
+                    continue;
+                }
+            }
+            
 
 
             Connection1.createconnection();
@@ -73,20 +55,20 @@ namespace Proj_HRMS
             do
             {
 
-            Console.WriteLine("Department Menu");
+            Console.WriteLine("\n\n*************Department Menu***************");
             Console.WriteLine("1.Print All Departments");
             Console.WriteLine("2.Print Department based on deptno");
             Console.WriteLine("3.Insert Department");
             Console.WriteLine("4.Update Department");
             Console.WriteLine("5.Delete Department");
 
-                Console.WriteLine("Employee Menu");
+                Console.WriteLine("\n\n******************Employee Menu******************");
                 Console.WriteLine("6.Print All Employees");
                 Console.WriteLine("7.Print Employees based on Emp_ID");
                 Console.WriteLine("8.Insert Employee");
                 Console.WriteLine("9.Update Employee");
                 Console.WriteLine("10.Delete Employee");
-                Console.WriteLine("Enter your Choice");
+                Console.WriteLine("\n\nEnter your Choice");
             choice = Convert.ToInt32(Console.ReadLine());
 
 
@@ -99,7 +81,7 @@ namespace Proj_HRMS
 
                 case 2:
                         
-                    Console.WriteLine("Enter department no to view details");
+                    Console.WriteLine("\nEnter department no to view details");
                      int Dept_ID = Convert.ToInt32(Console.ReadLine());
                         Connection1.GetDepartmentUsingDno(Dept_ID);
 
@@ -109,22 +91,25 @@ namespace Proj_HRMS
 
                     case 3:
                         
-                        Console.WriteLine("Enter Department Details to Enter Deptno,dname,location");
+                        Console.WriteLine("\nEnter Department Details to Enter Deptno,dname,location");
                         Department d = new Department();
+                        Console.WriteLine("\nEnter Dept_ID Please");
                         d.Dept_ID = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("\nEnter Department Name Please");
                         d.Dept_Name = Console.ReadLine();
 
                         while (string.IsNullOrEmpty(d.Dept_Name))
                         {
-                            Console.WriteLine("Department name Can ot be blank");
-                            Console.WriteLine("Enter Department Name");
+                            Console.WriteLine("\nDepartment name Can ot be blank");
+                            Console.WriteLine("\nEnter Department Name");
                             d.Dept_Name = Console.ReadLine();
                         }
+                        Console.WriteLine("\nEnter Department Location Name Please");
                         d.Location = Console.ReadLine();
                         while (string.IsNullOrEmpty(d.Location))
                         {
-                            Console.WriteLine("Department name Can ot be blank");
-                            Console.WriteLine("Enter Department Location");
+                            Console.WriteLine("\nDepartment name Can ot be blank");
+                            Console.WriteLine("\nEnter Department Location");
                             d.Location = Console.ReadLine();
                         }
 
@@ -133,7 +118,7 @@ namespace Proj_HRMS
 
                     case 4:
                        
-                        Console.WriteLine("Enter Department Details to Update Deptno,dname,location");
+                        Console.WriteLine("\nEnter Department Details to Update Deptno,dname,location");
                         Department d1 = new Department();
                         d1.Dept_ID = Convert.ToInt32(Console.ReadLine());
                         d1.Dept_Name = Console.ReadLine();
@@ -145,10 +130,10 @@ namespace Proj_HRMS
 
                     case 5:
                         Department d2 = new Department();
-                        Console.WriteLine("Enter Department no to delete");
+                        Console.WriteLine("\nEnter Department ID to delete");
                         d2.Dept_ID = Convert.ToInt32(Console.ReadLine());
                         Connection1.DeleteDepartment(d2.Dept_ID);
-                        Console.WriteLine("Record Deleted");
+                        Console.WriteLine("\nRecord Deleted");
                         break;
 
 
@@ -159,7 +144,7 @@ namespace Proj_HRMS
 
                     case 7:
 
-                        Console.WriteLine("Enter Employee no to view details");
+                        Console.WriteLine("\nEnter Employee no to view details");
                         int Emp_ID = Convert.ToInt32(Console.ReadLine());
                         Connection1.GetEmployeeUsingEno(Emp_ID);
 
@@ -167,10 +152,14 @@ namespace Proj_HRMS
 
                     case 8:
 
-                        Console.WriteLine("Enter Employee Details to Enter Emp_ID,Dept_ID,Name,Designation,Salary,Mobile_No,Email_ID");
+                        Console.WriteLine("\nEnter Employee Details to Enter Emp_ID,Dept_ID,Name,Designation,Salary,Mobile_No,Email_ID");
                         Employee e= new Employee();
+                        Console.WriteLine("Emp_Id Please");
+                        
                         e.Emp_ID= Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Department ID Please");
                         e.Dept_ID = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Name Please");
                         e.Name = Console.ReadLine();
                         while (string.IsNullOrEmpty(e.Name))
                         {
@@ -178,21 +167,59 @@ namespace Proj_HRMS
                             Console.WriteLine("Enter Employee Name");
                             e.Name = Console.ReadLine();
                         }
+                        Console.WriteLine("\nDesignation Please");
                         e.Designation = Console.ReadLine();
                         while (string.IsNullOrEmpty(e.Designation))
                         {
-                            Console.WriteLine("Employee Designation Can ot be blank");
-                            Console.WriteLine("Enter Employee Designation");
+                            Console.WriteLine("\nEmployee Designation Can ot be blank");
+                            Console.WriteLine("\nEnter Employee Designation");
                             e.Designation = Console.ReadLine();
                         }
+                        Console.WriteLine("\nSalary Please");
                         e.Salary = Convert.ToInt32(Console.ReadLine());
-                        e.Mobile_No= Console.ReadLine();
-                        e.Email_ID = Console.ReadLine();
-                        while (string.IsNullOrEmpty(e.Email_ID))
+                        
+                        while (true)
                         {
-                            Console.WriteLine("Employee Email_ID Can ot be blank");
-                            Console.WriteLine("Enter Employee Email_ID");
+
+                            Console.WriteLine("\nMobile NUmber Please");
+                            e.Mobile_No = Convert.ToInt64(Console.ReadLine());
+
+
+
+                            bool check = Connection1.IsValidMobileNo(e.Mobile_No);
+                            if (check == true)
+                            {
+                               
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("\nMobile Number is Invalid 10 digit please");
+                                Console.WriteLine("\nPlase enter Again");
+                                continue;
+                            }
+                        }
+                       
+                        while (true)
+                        {
+
+                            Console.WriteLine("\nEmail_Id Please");
                             e.Email_ID = Console.ReadLine();
+
+
+
+                            bool check = Connection1.IsValidEmail(e.Email_ID);
+                            if (check == true)
+                            {
+                               
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("\nEmail is Invalid ");
+                                Console.WriteLine("\nPlease enter Again");
+                                continue;
+                            }
                         }
 
                         Connection1.InsertEmployee(e.Emp_ID,e.Dept_ID, e.Name, e.Designation, e.Salary, e.Mobile_No, e.Email_ID);
@@ -207,7 +234,7 @@ namespace Proj_HRMS
                         e1.Name = Console.ReadLine();
                         e1.Designation = Console.ReadLine();
                         e1.Salary = Convert.ToInt32(Console.ReadLine());
-                        e1.Mobile_No = Console.ReadLine();
+                        e1.Mobile_No =Convert.ToInt64(Console.ReadLine());
                         e1.Email_ID = Console.ReadLine();
 
                         Connection1.UpdateEmployee(e1.Emp_ID, e1.Dept_ID, e1.Name, e1.Designation, e1.Salary, e1.Mobile_No, e1.Email_ID);
@@ -215,18 +242,18 @@ namespace Proj_HRMS
 
                     case 10:
                         Employee e3 = new Employee();
-                        Console.WriteLine("Enter Employee no to delete");
+                        Console.WriteLine("\nEnter Employee no to delete");
                         e3.Emp_ID = Convert.ToInt32(Console.ReadLine());
                         Connection1.DeleteEmployee(e3.Emp_ID);
                         break;
 
 
                     default:
-                    Console.WriteLine("Invalid Case");
+                    Console.WriteLine("\nInvalid Case");
                     break;
             }
 
-            Console.WriteLine("Enter y r Y to continue");
+            Console.WriteLine("\n\nEnter y r Y to continue");
             ch = Convert.ToChar(Console.ReadLine());
 
         }

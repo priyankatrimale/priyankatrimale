@@ -28,38 +28,7 @@ namespace HRModel
 
 
 
-        //DeptDAL dal = new DeptDAL();
-        //public int Dept_ID
-        //{
-        //    get;
-        //    set;
-        //}
-
-        //public string Dept_Name
-        //{
-        //    get;
-        //    set;
-        //}
-
-        //public string location
-        //{
-        //    get;
-        //    set;
-        //}
-
-      
-
-       // Connection1.GetDepartment();
-
-        //public void PrintDepartmentData()
-        //{
-        //    SqlDataReader reader = GetDeptDta();
-        //    Console.WriteLine("Deptno\tDname\tLocation");
-        //    while (reader.Read())
-        //    {
-        //        Console.WriteLine(reader[0] + "\t" + reader[1] + "\t" + reader[2]);
-        //    }
-        //}
+     
 
         
 

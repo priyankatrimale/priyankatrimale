@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Data;
 using HRModel;
+using System.Text.RegularExpressions;
 
 
 namespace HRFunctions
@@ -137,7 +138,7 @@ namespace HRFunctions
             {
                 Console.WriteLine("Exception " + ex.Message);
             }
-            // return no;
+            
         }
 
 
@@ -168,7 +169,7 @@ namespace HRFunctions
             {
                 Console.WriteLine("Exception " + ex.Message);
             }
-            // return no;
+           
         }
 
         public static void DeleteDepartment(int Dept_ID)
@@ -191,7 +192,7 @@ namespace HRFunctions
             catch (SqlException ex)
             {
                 Console.WriteLine("Exception " + ex.Message);
-                //return no;
+              
 
             }
         }
@@ -215,7 +216,7 @@ namespace HRFunctions
 
                 while (reader.Read())
                 {
-                    Console.WriteLine(reader[0] + "\t" + reader[1] + "\t" + reader[2] + "\t" + reader[3] + "\t" + reader[4] + "\t" + reader[5] + "\t" + reader[6]);
+                    Console.WriteLine(reader[0] + "\t" + reader[1] + "\t" + reader[2] + "\t" + reader[3] + "\t\t" + reader[4] + "\t\t\t" + reader[5] + "\t" + reader[6]);
                 }
 
             }
@@ -245,7 +246,7 @@ namespace HRFunctions
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    Console.WriteLine(reader[0] + "\t" + reader[1] + "\t" + reader[2] + "\t" + reader[3] + "\t" + reader[4] + "\t" + reader[5] + "\t" + reader[6]);
+                    Console.WriteLine(reader[0] + "\t" + reader[1] + "\t" + reader[2] + "\t" + reader[3] + "\t\t" + reader[4] + "\t\t" + reader[5] + "\t" + reader[6]);
                 }
 
             }
@@ -257,7 +258,7 @@ namespace HRFunctions
         }
 
 
-        public static void InsertEmployee(int Emp_ID,int Dept_ID,string Name,string Designation,decimal Salary, string Mobile_no,string Email_ID)
+        public static void InsertEmployee(int Emp_ID,int Dept_ID,string Name,string Designation,decimal Salary, long Mobile_no,string Email_ID)
         {
             int no = 0;
             try
@@ -278,6 +279,7 @@ namespace HRFunctions
                 cmd.Parameters.AddWithValue("emailid", Email_ID);
 
 
+
                 no = cmd.ExecuteNonQuery();
 
                 if (no > 0)
@@ -291,11 +293,42 @@ namespace HRFunctions
             {
                 Console.WriteLine("Exception " + ex.Message);
             }
-            // return no;
+          
+        }
+        public static bool IsValidEmail(string emailid)
+        {
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");  
+            Match match = regex.Match(emailid);  
+            if (match.Success)
+            {
+                return true;
+            }   
+            else
+            {
+                return false;
+            }
+            
+        }
+
+        public static bool IsValidMobileNo(long mno)
+        {
+            String strRegex = @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
+           
+            Regex regex = new Regex(strRegex);
+         
+            if (regex.IsMatch(Convert.ToString(mno)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
 
-        public static void UpdateEmployee(int Emp_ID, int Dept_ID, string Name, string Designation, decimal Salary, string Mobile_no, string Email_ID)
+        public static void UpdateEmployee(int Emp_ID, int Dept_ID, string Name, string Designation, decimal Salary, long Mobile_no, string Email_ID)
         {
             int no = 0;
             try
@@ -324,7 +357,7 @@ namespace HRFunctions
             {
                 Console.WriteLine("Exception " + ex.Message);
             }
-            // return no;
+           
         }
 
 
@@ -348,8 +381,7 @@ namespace HRFunctions
             catch (SqlException ex)
             {
                 Console.WriteLine("Exception " + ex.Message);
-                //return no;
-
+                
             }
         }
 
